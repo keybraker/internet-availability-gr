@@ -1,0 +1,24 @@
+{
+    "name": "greek-internet-speed-crawler",
+    "author": "Ioannis Tsiakkas",
+    "license": "ISC",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Greek Internet Speek Crawler",
+    "main": "crawler.ts",
+    "scripts": {
+        "start": "node crawler.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/keybraker/greek-internet-speed-crawler.git"
+    },
+    "bugs": {
+        "url": "https://github.com/keybraker/greek-internet-speed-crawler/issues"
+    },
+    "homepage": "https://github.com/keybraker/greek-internet-speed-crawler#readme",
+    "keywords": [],
+    "dependencies": {
+        "crawler": "^1.3.0"
+    }
+}
