@@ -1,0 +1,264 @@
+{
+    "states": [
+        {
+            "id": "39",
+            "name": "ΑΓΙΟ ΟΡΟΣ",
+            "countiesFilePath": "./generated/counties/counties_39.json"
+        },
+        {
+            "id": "1",
+            "name": "Ν. ΑΙΤΩΛΟΑΚΑΡΝΑΝΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "7",
+            "name": "Ν. ΑΡΓΟΛΙΔΑΣ",
+            "countiesFilePath": "./generated/counties/counties_of_state_7.json"
+        },
+        {
+            "id": "8",
+            "name": "Ν. ΑΡΚΑΔΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "18",
+            "name": "Ν. ΑΡΤΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "52",
+            "name": "Ν. ΑΤΤΙΚΗΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "9",
+            "name": "Ν. ΑΧΑΪΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "2",
+            "name": "Ν. ΒΟΙΩΤΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "26",
+            "name": "Ν. ΓΡΕΒΕΝΩΝ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "27",
+            "name": "Ν. ΔΡΑΜΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "43",
+            "name": "Ν. ΔΩΔΕΚΑΝΗΣΟΥ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "40",
+            "name": "Ν. ΕΒΡΟΥ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "3",
+            "name": "Ν. ΕΥΒΟΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "4",
+            "name": "Ν. ΕΥΡΥΤΑΝΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "14",
+            "name": "Ν. ΖΑΚΥΝΘΟΥ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "10",
+            "name": "Ν. ΗΛΕΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "28",
+            "name": "Ν. ΗΜΑΘΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "48",
+            "name": "Ν. ΗΡΑΚΛΕΙΟΥ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "19",
+            "name": "Ν. ΘΕΣΠΡΩΤΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "29",
+            "name": "Ν. ΘΕΣΣΑΛΟΝΙΚΗΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "20",
+            "name": "Ν. ΙΩΑΝΝΙΝΩΝ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "30",
+            "name": "Ν. ΚΑΒΑΛΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "22",
+            "name": "Ν. ΚΑΡΔΙΤΣΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "31",
+            "name": "Ν. ΚΑΣΤΟΡΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "15",
+            "name": "Ν. ΚΕΡΚΥΡΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "16",
+            "name": "Ν. ΚΕΦΑΛΛΟΝΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "32",
+            "name": "Ν. ΚΙΛΚΙΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "33",
+            "name": "Ν. ΚΟΖΑΝΗΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "11",
+            "name": "Ν. ΚΟΡΙΝΘΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "44",
+            "name": "Ν. ΚΥΚΛΑΔΩΝ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "12",
+            "name": "Ν. ΛΑΚΩΝΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "23",
+            "name": "Ν. ΛΑΡΙΣΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "49",
+            "name": "Ν. ΛΑΣΙΘΙΟΥ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "45",
+            "name": "Ν. ΛΕΣΒΟΥ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "17",
+            "name": "Ν. ΛΕΥΚΑΔΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "24",
+            "name": "Ν. ΜΑΓΝΗΣΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "13",
+            "name": "Ν. ΜΕΣΣΗΝΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "41",
+            "name": "Ν. ΞΑΝΘΗΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "34",
+            "name": "Ν. ΠΕΛΛΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "35",
+            "name": "Ν. ΠΙΕΡΙΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "21",
+            "name": "Ν. ΠΡΕΒΕΖΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "50",
+            "name": "Ν. ΡΕΘΥΜΝΟΥ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "42",
+            "name": "Ν. ΡΟΔΟΠΗΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "46",
+            "name": "Ν. ΣΑΜΟΥ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "36",
+            "name": "Ν. ΣΕΡΡΩΝ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "25",
+            "name": "Ν. ΤΡΙΚΑΛΩΝ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "5",
+            "name": "Ν. ΦΘΙΩΤΙΔΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "37",
+            "name": "Ν. ΦΛΩΡΙΝΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "6",
+            "name": "Ν. ΦΩΚΙΔΑΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "38",
+            "name": "Ν. ΧΑΛΚΙΔΙΚΗΣ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "51",
+            "name": "Ν. ΧΑΝΙΩΝ",
+            "countiesFilePath": ""
+        },
+        {
+            "id": "47",
+            "name": "Ν. ΧΙΟΥ",
+            "countiesFilePath": ""
+        }
+    ]
+}
