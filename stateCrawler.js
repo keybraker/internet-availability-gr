@@ -6,7 +6,7 @@ const stateList = require('./data/stateList.json');
 const stateListSTATIC = editJsonFile(`./data/stateList.json`);
 
 if (!process.argv[2]) {
-    console.log('You must give Greek state and county ids as argument, or "All" to fetch them all.');
+    console.log('You must give Greek state and municipality ids as argument, or "All" to fetch them all.');
     return 0;
 }
 
@@ -26,25 +26,39 @@ if (stateId === 'All') {
     });
 
     if (statesToFetch.length === 0) {
-        console.log('You must give a valid, Greek state and county ids, state ids can be found in documentation.');
+        console.log('You must give a valid, Greek state and municipality ids, state ids can be found in documentation.');
         return 0;
     }
 }
 
 let urlId = 1641891804000;
-const queueCountyList = statesToFetch
-    .map(state => {
-        if (!state.countiesFilePath || state.countiesFilePath === '') {
-            return `https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
-                `stateId=${state.id}&` +
-                `_=${urlId++}`;
+let queueMunicipalityList = [];
+
+for (let i in statesToFetch) {
+    if (!statesToFetch[i].municipalitiesFilePath || statesToFetch[i].municipalitiesFilePath === '') {
+        if (!municipalityList) {
+            queueMunicipalityList.push(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
+                `stateId=${statesToFetch[i].id}&` +
+                `_=${urlId++}`
+            );
         }
-    })
-    .filter(url => !!url);
+    } else {
+        if (!fs.existsSync(statesToFetch[i].municipalitiesFilePath)) {
+            queueMunicipalityList.push(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
+                `stateId=${statesToFetch[i].id}&` +
+                `_=${urlId++}`
+            );
+        }
+    }
+}
+
+if (queueMunicipalityList.length === 0) {
+    console.log('All municipalities have been fetched.');
+}
 
 const c = new Crawler({
     maxConnections: 10,
-    rateLimit: 1000,
+    rateLimit: 800,
 
     // This will be called for each crawled page
     callback: (error, res, done) => {
@@ -59,9 +73,9 @@ const c = new Crawler({
 
             const state = stateList.states.find(state => state.id === id);
 
-            // finding states counties with resprective ids
+            // finding states municipalities with resprective ids
             const lis = $("li");
-            let counties = [];
+            let municipalities = [];
 
             for (let i = 1; i < Object.keys(lis).length; i++) {
                 const li = lis[i];
@@ -69,7 +83,7 @@ const c = new Crawler({
                     if (li.children.length > 0) {
                         const child = li.children.find(child => child.type === 'tag' && child.name === 'a');
                         child.children.forEach(child2 => {
-                            counties.push({
+                            municipalities.push({
                                 name: child2.data.toUpperCase(),
                                 id: child2.parent.attribs.id,
                                 streetsFilePath: ""
@@ -79,22 +93,34 @@ const c = new Crawler({
                 }
             }
 
-            state.countiesFilePath = `./generated/counties/counties_of_state_${state.id}.json`;
+            if (!fs.existsSync('./generated')) {
+                fs.mkdirSync('./generated');
+            }
 
-            const stateCounties = editJsonFile(state.countiesFilePath);
-            if (stateCounties) {
-                stateCounties.write(JSON.stringify(counties));
+            if (!fs.existsSync(`./generated/state_${stateId}`)) {
+                fs.mkdirSync((`./generated/state_${stateId}`));
+            }
+
+            state.municipalitiesFilePath = `./generated/state_${stateId}/municipalities.json`;
+
+            const stateMunicipalities = editJsonFile(state.municipalitiesFilePath);
+            if (stateMunicipalities) {
+                stateMunicipalities.write(JSON.stringify(municipalities));
             } else {
-                fs.appendFile(state.countiesFilePath, JSON.stringify(counties), function (err) {
+                fs.appendFile(state.municipalitiesFilePath, JSON.stringify(municipalities), function (err) {
                     if (err) throw err;
                 });
             }
 
             stateListSTATIC.write(JSON.stringify(stateList));
 
-            console.log(`Fetched ${counties.length} ${counties.length === 1 ? 'county' : 'counties'} for state ${state.name}.`);
+            console.log(`Fetched ${municipalities.length} ${municipalities.length === 1 ? 'municipality' : 'municipalities'} for state ${state.name}.`);
+
+            done(() => {
+                console.log(`\nState crawler has finished successfully.`);
+            });
         }
     }
 });
 
-c.queue(queueCountyList);
+c.queue(queueMunicipalityList);

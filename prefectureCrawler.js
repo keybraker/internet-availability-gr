@@ -1,72 +1,107 @@
 const Crawler = require('crawler');
 const editJsonFile = require("edit-json-file");
-const stateList = require('./data/stateList.json');
-const file = editJsonFile(`${__dirname}/data/stateList.json`);
 
-if (!process.argv[2]) {
-    console.log('You must give Greek state and county ids as argument, or "All" to fetch them all.');
+const stateList = require('./data/stateList.json');
+
+if ((!process.argv[2] && process.argv[2] !== 'All') || (process.argv[2] !== 'All' && !process.argv[3])) {
+    console.log('You must give Greek state and municipality ids as argument, or "All" to fetch them all.');
     return 0;
 }
 
-let countyToFetch = [];
-let stateId = process.argv[2];
-let countyId = process.argv[3];
+let statesToFetch = [];
+let stateIdArg = process.argv[2];
+let municipalityIdArg = process.argv[3];
 
-if (stateId === 'All') {
-    countyToFetch = stateList.states.map(state => state);
+let municipalityList;
+let streetList;
+
+if (stateIdArg === 'All') {
+    statesToFetch = stateList.states.map(state => state);
 } else {
     stateList.states.some(state => {
-        if (state.id === stateId) {
-            return state.counties.some(county => {
-                if (county.id === countyId) {
-                    countyToFetch.push({ stateName: state.name, county: county });
-                    return true;
-                } else {
-                    return false;
-                }
-            })
+        if (state.id === stateIdArg) {
+            statesToFetch.push(state);
+            return true;
         }
 
         return false;
     });
 
-    if (countyToFetch.length === 0) {
-        console.log('You must give valid, Greek state and county ids, states can be found in documentation.');
-        return 0;
-    }
-
-    let noStreets = false;
-    countyToFetch.forEach(obj => {
-        if (!obj.county.streets || obj.county.streets.lenght === 0) {
-            console.log(`${obj.county.name} has no streets.`);
-            noStreets = true;
-        }
-    })
-
-    if (noStreets) {
-        console.log('Before running prefectureCrawler.js you must first fetch all streets with countyCrawler.js.');
+    if (statesToFetch.length === 0) {
+        console.log('You must give a valid, Greek state and municipality ids, state ids can be found in documentation.');
         return 0;
     }
 }
 
 let urlId = 1641891804000;
-let queueList = [];
+let queueStreetList = [];
+let objectStreetList = [];
 
-countyToFetch.forEach(obj => {
-    if (obj.county.streets && obj.county.streets.length !== 0) {
-        obj.county.streets.forEach(street => {
-            queueList.push(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
-                `streetName=${encodeURI(street.name)}&` +
-                `stateId=${stateId}&` +
-                `municipalityId=${countyId}&` +
-                `_=${urlId++}`);
-        });
+for (i in statesToFetch) {
+    if (!statesToFetch[i].municipalitiesFilePath) {
+        console.log('[1] Before running prefectureCrawler.js you must first fetch all municipalities with stateCrawler.js.');
+        return 0;
     }
-});
+
+    municipalityList = require(statesToFetch[i].municipalitiesFilePath);
+
+    if (!municipalityList) {
+        console.log('[2] Before running prefectureCrawler.js you must first fetch all municipalities with stateCrawler.js.');
+        return 0;
+    }
+
+    for (j in municipalityList) {
+        if (municipalityIdArg !== 'All' && municipalityIdArg !== municipalityList[j].id) {
+            continue;
+        }
+
+        if (!municipalityList[j].streetsFilePath) {
+            console.log('[3] Before running prefectureCrawler.js you must first fetch all streets with municipalityCrawler.js.');
+            return 0;
+        }
+
+        streetList = require(municipalityList[j].streetsFilePath);
+
+        if (!streetList) {
+            console.log('[4] Before running prefectureCrawler.js you must first fetch all streets with municipalityCrawler.js.');
+            return 0;
+        }
+
+        objectStreetList.push({
+            filePath: municipalityList[j].streetsFilePath,
+            fileData: streetList
+        });
+
+        for (k in streetList) {
+            if (!streetList[k].prefecture.id) {
+                if ((stateIdArg && stateIdArg.localeCompare('All') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('All') === 0)) {
+                    queueStreetList.push(encodeURI(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
+                        `filePath=${municipalityList[j].streetsFilePath}&` +
+                        `streetName=${streetList[k].name}&` +
+                        `stateId=${statesToFetch[i].id}&` +
+                        `municipalityId=${municipalityList[j].id}&` +
+                        `_=${urlId++}`));
+                } else if (municipalityIdArg == municipalityList[j].id) {
+                    queueStreetList.push(encodeURI(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
+                        `filePath=${municipalityList[j].streetsFilePath}&` +
+                        `streetName=${streetList[k].name}&` +
+                        `stateId=${statesToFetch[i].id}&` +
+                        `municipalityId=${municipalityList[j].id}&` +
+                        `_=${urlId++}`));
+                }
+            }
+        }
+    }
+}
+
+if (queueStreetList.length === 0) {
+    console.log('You must give a valid, Greek municipality id.');
+    return 0;
+}
 
 const c = new Crawler({
     maxConnections: 10,
-    rateLimit: 1000,
+    rateLimit: 800,
 
     // This will be called for each crawled page
     callback: (error, res, done) => {
@@ -77,18 +112,19 @@ const c = new Crawler({
 
             // finding current state
             let uri = res.options.uri;
+            filePath = uri.substring(uri.indexOf("filePath=") + 9, uri.indexOf("&streetName="));
             streetName = decodeURI(uri.substring(uri.indexOf("streetName=") + 11, uri.indexOf("&stateId=")));
             stateId = uri.substring(uri.indexOf("stateId=") + 8, uri.indexOf("&municipalityId="));
-            countyId = uri.substring(uri.indexOf("municipalityId=") + 15, uri.indexOf("&_="));
+            municipalityId = uri.substring(uri.indexOf("municipalityId=") + 15, uri.indexOf("&_="));
 
-            
-            const state = stateList.states.find(state => state.id === stateId);
-            const county = state.counties.find(county => county.id === countyId);
-            console.log('county :>> ', county);
-            console.log('streetName :>> ', streetName);
-            const street = county.streets.find(str => str.name === streetName);
+            const streetListFile = objectStreetList.find(streetListFile => streetListFile.filePath === filePath);
 
-            // finding states counties with resprective ids
+            const streets = streetListFile.fileData;
+            const streetsFilePath = streetListFile.filePath;
+
+            const street = streets.find(str => str.name === streetName);
+
+            // finding states streets with resprective ids
 
             const lis = $("li");
 
@@ -107,18 +143,17 @@ const c = new Crawler({
                 }
             }
 
-            console.log(`Street ${street.name} is in prefecture ${street.prefecture.name}.`);
 
-            file.write(JSON.stringify(stateList));
-        }
+            const streetsJsono = editJsonFile(streetsFilePath);
+            streetsJsono.write(JSON.stringify(streets));
 
-        done(() => {
-            file.save();
-            file = editJsonFile(`${__dirname}/database/stateList.json`, {
-                autosave: true
+            console.log(`Street ${street.name} from municipality ${municipalityId} is in prefecture ${street.prefecture.name}.`);
+
+            done(() => {
+                console.log(`\nPrefecture crawler has finished successfully.`);
             });
-        });
+        }
     }
 });
 
-c.queue(queueList);
+c.queue(queueStreetList);
