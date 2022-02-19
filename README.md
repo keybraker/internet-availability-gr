@@ -5,16 +5,10 @@ This program crawls [Cosmote's](https://www.cosmote.gr/selfcare/jsp/diathesimoti
 ## How it works
 Greek states are stored under `data/stateList.json` where you can see the number correlating to each state.
 
-## How it works
-
 1. ```stateCrawler.js```
 
    ```bash
-   node stateCrawler.js 39
-   ```
-
-   ```bash
-   node stateCrawler.js all
+   node stateCrawler.js <stateId> or <all>
    ```
 
   __stateCrawler.js__ _is deployed in order to fetch all municipalities of chosen state. You must give one argument, either a specific number (not state name) or just type 'all' to fetch all municipalities of state._
@@ -25,15 +19,7 @@ Greek states are stored under `data/stateList.json` where you can see the number
 2. ```municipalityCrawler.js```
 
    ```bash
-   node municipalityCrawler.js 39 417
-   ```
-
-   ```bash
-   node municipalityCrawler.js 39 all
-   ```
-
-   ```bash
-   node municipalityCrawler.js all
+   node municipalityCrawler.js <stateId municipalityId> or <stateId all> or <all>
    ```
    
    __municipalityCrawler.js__ _is deployed in order to fetch all streets in chosen municipality. You must give two arguments, first argument must be a specific number (not state name) or just type all to fetch all streets in all municipalities. Given you have not entered all as first argument you can give as second argument a specific number (not municipality name) or just type all to fetch all streets in selected municipality._
@@ -44,15 +30,7 @@ Greek states are stored under `data/stateList.json` where you can see the number
 3. ```prefectureCrawler.js```
 
    ```bash
-   node prefectureCrawler.js 39 417
-   ```
-
-   ```bash
-   node prefectureCrawler.js 39 all
-   ```
-
-   ```bash
-   node prefectureCrawler.js all
+   node prefectureCrawler.js <stateId municipalityId> or <stateId all> or <all>
    ```
    
    __prefectureCrawler.js__ _is deployed in order to fetch all street prefectures in chosen municipality. You must give two arguments, first argument must be a specific number (not state name) or just type all to fetch all street prefectures in all municipalities. Given you have not entered all as first argument you can give as second argument a specific number (not municipality name) or just type all to fetch all street prefectures in selected municipality._
@@ -68,16 +46,9 @@ Greek states are stored under `data/stateList.json` where you can see the number
 4. ```speedAvailabilityCrawler.js```
 
    ```bash
-   node speedAvailabilityCrawler.js 39 417 fast
+   node speedAvailabilityCrawler.js <stateId municipalityId fast> or <stateId all> or <all>
    ```
-
-   ```bash
-   node speedAvailabilityCrawler.js 39 all
-   ```
-
-   ```bash
-   node speedAvailabilityCrawler.js all
-   ```
+   * (fast optional)
    
    __speedAvailabilityCrawler.js__ _is deployed in order to fetch all available speeds of given street in chosen municipality. You must give two arguments, first argument must be a specific number (not state name) or just type all to fetch all available speeds of given street in all municipalities. Given you have not entered all as first argument you can give as second argument a specific number (not municipality name) or just type all to fetch all available speeds of given street in selected municipality. In addition fafst argument can be given to crawl through a smaller amount of street numbers (it is optional).
    
@@ -96,10 +67,40 @@ Greek states are stored under `data/stateList.json` where you can see the number
         ]
    ```
 
-#### Instalation
+## Data Analyzer
+
+   In order to get information from your fetched data just type:
+
+   ```bash
+   node dataAnalyzer.js <filePath: streets>
+   ```
+
+   e.x
+   
+   ```bash
+   node dataAnalyzer.js generated/state_48/streets/streets_of_municipality_893.json
+   ```
+
+   The output will look like this:
+
+   ```
+   Network availability analyzer:
+    24 Mbps have 9329/35523, which is 26.3% of all.
+    50 Mbps have 5398/35523, which is 15.2% of all.
+   100 Mbps have 4879/35523, which is 13.7% of all.
+   200 Mbps have 4865/35523, which is 13.7% of all.
+
+   57.9% of households with  24Mbps have also access to  50Mbps.
+   90.4% of households with  50Mbps have also access to 100Mbps.
+   99.7% of households with 100Mbps have also access to 200Mbps.
+   ```
+
+## Instalation
+   
    ```bash
    npm install
    ```
+##
 
 <p align="center">
    <a href="https://github.com/keybraker">Ioannis Tsiakkas</a> | <a href="http://www.gnu.org/philosophy/free-sw.html">GPL-3.0 License</a> | <a href="https://www.paypal.com/paypalme/tsiakkas">PayPalMe</a>
