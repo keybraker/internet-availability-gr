@@ -3,8 +3,8 @@ const editJsonFile = require("edit-json-file");
 
 const stateList = require('./data/stateList.json');
 
-if ((!process.argv[2] && process.argv[2] !== 'All') || (process.argv[2] !== 'All' && !process.argv[3])) {
-    console.log('You must give Greek state and municipality ids as argument, or "All" to fetch them all.');
+if ((!process.argv[2] && process.argv[2] !== 'all') || (process.argv[2] !== 'all' && !process.argv[3])) {
+    console.log('You must give Greek state and municipality ids as argument, or "all" to fetch them all.');
     return 0;
 }
 
@@ -15,7 +15,7 @@ let municipalityIdArg = process.argv[3];
 let municipalityList;
 let streetList;
 
-if (stateIdArg === 'All') {
+if (stateIdArg === 'all') {
     statesToFetch = stateList.states.map(state => state);
 } else {
     stateList.states.some(state => {
@@ -51,7 +51,7 @@ for (i in statesToFetch) {
     }
 
     for (j in municipalityList) {
-        if (municipalityIdArg !== 'All' && municipalityIdArg !== municipalityList[j].id) {
+        if (municipalityIdArg !== 'all' && municipalityIdArg !== municipalityList[j].id) {
             continue;
         }
 
@@ -74,7 +74,7 @@ for (i in statesToFetch) {
 
         for (k in streetList) {
             if (!streetList[k].prefecture.id) {
-                if ((stateIdArg && stateIdArg.localeCompare('All') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('All') === 0)) {
+                if ((stateIdArg && stateIdArg.localeCompare('all') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('all') === 0)) {
                     queueStreetList.push(encodeURI(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
                         `filePath=${municipalityList[j].streetsFilePath}&` +
                         `streetName=${streetList[k].name}&` +

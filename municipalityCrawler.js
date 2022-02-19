@@ -4,8 +4,8 @@ const fs = require('fs');
 
 const stateList = require('./data/stateList.json');
 
-if ((!process.argv[2] && process.argv[2] !== 'All') || (process.argv[2] !== 'All' && !process.argv[3])) {
-    console.log('You must give Greek state and municipality ids as argument, or "All" to fetch them all.');
+if ((!process.argv[2] && process.argv[2] !== 'all') || (process.argv[2] !== 'all' && !process.argv[3])) {
+    console.log('You must give Greek state and municipality ids as argument, or "all" to fetch them all.');
     return 0;
 }
 
@@ -13,7 +13,7 @@ let statesToFetch = [];
 let stateIdArg = process.argv[2];
 let municipalityIdArg = process.argv[3];
 
-if (stateIdArg === 'All') {
+if (stateIdArg === 'all') {
     statesToFetch = stateList.states.map(state => state);
 } else {
     stateList.states.some(state => {
@@ -55,7 +55,7 @@ for (let i in statesToFetch) {
 
     for (let j in municipalityList) {
         if (!fs.existsSync(municipalityList[j].streetsFilePath)) {
-            if ((stateIdArg && stateIdArg.localeCompare('All') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('All') === 0)) {
+            if ((stateIdArg && stateIdArg.localeCompare('all') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('all') === 0)) {
                 queueStreetList.push(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
                     `filePath=${statesToFetch[i].municipalitiesFilePath}&` +
                     `stateId=${statesToFetch[i].id}&` +
@@ -133,7 +133,7 @@ const c = new Crawler({
 
             // editing and adding streets file path to municipality file
             currentMunicipality.streetsFilePath = `./generated/state_${stateId}/streets/streets_of_municipality_${municipalityId}.json`;
-            const municipalitiesFile = editJsonFile(`./generated/state_${stateId}/streets/streets_of_municipality_${municipalityId}.json`);
+            const municipalitiesFile = editJsonFile(currentMunicipality.streetsFilePath);
 
             if (municipalitiesFile) {
                 municipalitiesFile.write(JSON.stringify(streets));

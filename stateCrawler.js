@@ -6,14 +6,14 @@ const stateList = require('./data/stateList.json');
 const stateListSTATIC = editJsonFile(`./data/stateList.json`);
 
 if (!process.argv[2]) {
-    console.log('You must give Greek state and municipality ids as argument, or "All" to fetch them all.');
+    console.log('You must give Greek state and municipality ids as argument, or "all" to fetch them all.');
     return 0;
 }
 
 let statesToFetch = [];
 let stateId = process.argv[2];
 
-if (stateId === 'All') {
+if (stateId === 'all') {
     statesToFetch = stateList.states.map(state => state);
 } else {
     stateList.states.some(state => {
@@ -53,7 +53,7 @@ for (let i in statesToFetch) {
 }
 
 if (queueMunicipalityList.length === 0) {
-    console.log('All municipalities have been fetched.');
+    console.log('all municipalities have been fetched.');
 }
 
 const c = new Crawler({
@@ -102,8 +102,8 @@ const c = new Crawler({
             }
 
             state.municipalitiesFilePath = `./generated/state_${stateId}/municipalities.json`;
-
             const stateMunicipalities = editJsonFile(state.municipalitiesFilePath);
+
             if (stateMunicipalities) {
                 stateMunicipalities.write(JSON.stringify(municipalities));
             } else {

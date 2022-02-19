@@ -1,1 +1,316 @@
-{"states":[{"id":"39","name":"ΑΓΙΟ ΟΡΟΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/state_39/municipalities.json"},{"id":"1","name":"Ν. ΑΙΤΩΛΟΑΚΑΡΝΑΝΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/state_1/municipalities.json"},{"id":"7","name":"Ν. ΑΡΓΟΛΙΔΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_7.json"},{"id":"8","name":"Ν. ΑΡΚΑΔΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_8.json"},{"id":"18","name":"Ν. ΑΡΤΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_18.json"},{"id":"52","name":"Ν. ΑΤΤΙΚΗΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_52.json"},{"id":"9","name":"Ν. ΑΧΑΪΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_9.json"},{"id":"2","name":"Ν. ΒΟΙΩΤΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_2.json"},{"id":"26","name":"Ν. ΓΡΕΒΕΝΩΝ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_26.json"},{"id":"27","name":"Ν. ΔΡΑΜΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_27.json"},{"id":"43","name":"Ν. ΔΩΔΕΚΑΝΗΣΟΥ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_43.json"},{"id":"40","name":"Ν. ΕΒΡΟΥ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_40.json"},{"id":"3","name":"Ν. ΕΥΒΟΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_3.json"},{"id":"4","name":"Ν. ΕΥΡΥΤΑΝΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_4.json"},{"id":"14","name":"Ν. ΖΑΚΥΝΘΟΥ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_14.json"},{"id":"10","name":"Ν. ΗΛΕΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_10.json"},{"id":"28","name":"Ν. ΗΜΑΘΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_28.json"},{"id":"48","name":"Ν. ΗΡΑΚΛΕΙΟΥ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_48.json"},{"id":"19","name":"Ν. ΘΕΣΠΡΩΤΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_19.json"},{"id":"29","name":"Ν. ΘΕΣΣΑΛΟΝΙΚΗΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_29.json"},{"id":"20","name":"Ν. ΙΩΑΝΝΙΝΩΝ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_20.json"},{"id":"30","name":"Ν. ΚΑΒΑΛΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_30.json"},{"id":"22","name":"Ν. ΚΑΡΔΙΤΣΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_22.json"},{"id":"31","name":"Ν. ΚΑΣΤΟΡΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_31.json"},{"id":"15","name":"Ν. ΚΕΡΚΥΡΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_15.json"},{"id":"16","name":"Ν. ΚΕΦΑΛΛΟΝΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_16.json"},{"id":"32","name":"Ν. ΚΙΛΚΙΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_32.json"},{"id":"33","name":"Ν. ΚΟΖΑΝΗΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_33.json"},{"id":"11","name":"Ν. ΚΟΡΙΝΘΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_11.json"},{"id":"44","name":"Ν. ΚΥΚΛΑΔΩΝ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_44.json"},{"id":"12","name":"Ν. ΛΑΚΩΝΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_12.json"},{"id":"23","name":"Ν. ΛΑΡΙΣΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_23.json"},{"id":"49","name":"Ν. ΛΑΣΙΘΙΟΥ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_49.json"},{"id":"45","name":"Ν. ΛΕΣΒΟΥ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_45.json"},{"id":"17","name":"Ν. ΛΕΥΚΑΔΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_17.json"},{"id":"24","name":"Ν. ΜΑΓΝΗΣΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_24.json"},{"id":"13","name":"Ν. ΜΕΣΣΗΝΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_13.json"},{"id":"41","name":"Ν. ΞΑΝΘΗΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_41.json"},{"id":"34","name":"Ν. ΠΕΛΛΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_34.json"},{"id":"35","name":"Ν. ΠΙΕΡΙΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_35.json"},{"id":"21","name":"Ν. ΠΡΕΒΕΖΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_21.json"},{"id":"50","name":"Ν. ΡΕΘΥΜΝΟΥ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_50.json"},{"id":"42","name":"Ν. ΡΟΔΟΠΗΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_42.json"},{"id":"46","name":"Ν. ΣΑΜΟΥ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_46.json"},{"id":"36","name":"Ν. ΣΕΡΡΩΝ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_36.json"},{"id":"25","name":"Ν. ΤΡΙΚΑΛΩΝ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_25.json"},{"id":"5","name":"Ν. ΦΘΙΩΤΙΔΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_5.json"},{"id":"37","name":"Ν. ΦΛΩΡΙΝΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_37.json"},{"id":"6","name":"Ν. ΦΩΚΙΔΑΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_6.json"},{"id":"38","name":"Ν. ΧΑΛΚΙΔΙΚΗΣ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_38.json"},{"id":"51","name":"Ν. ΧΑΝΙΩΝ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_51.json"},{"id":"47","name":"Ν. ΧΙΟΥ","countiesFilePath":"","municipalitiesFilePath":"./generated/municipalities/municipalities_of_state_47.json"}]}
+{
+    "states": [
+        {
+            "id": "39",
+            "name": "ΑΓΙΟ ΟΡΟΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "1",
+            "name": "Ν. ΑΙΤΩΛΟΑΚΑΡΝΑΝΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "7",
+            "name": "Ν. ΑΡΓΟΛΙΔΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "8",
+            "name": "Ν. ΑΡΚΑΔΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "18",
+            "name": "Ν. ΑΡΤΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "52",
+            "name": "Ν. ΑΤΤΙΚΗΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "9",
+            "name": "Ν. ΑΧΑΪΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "2",
+            "name": "Ν. ΒΟΙΩΤΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "26",
+            "name": "Ν. ΓΡΕΒΕΝΩΝ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "27",
+            "name": "Ν. ΔΡΑΜΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "43",
+            "name": "Ν. ΔΩΔΕΚΑΝΗΣΟΥ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "40",
+            "name": "Ν. ΕΒΡΟΥ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "3",
+            "name": "Ν. ΕΥΒΟΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "4",
+            "name": "Ν. ΕΥΡΥΤΑΝΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "14",
+            "name": "Ν. ΖΑΚΥΝΘΟΥ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "10",
+            "name": "Ν. ΗΛΕΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "28",
+            "name": "Ν. ΗΜΑΘΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "48",
+            "name": "Ν. ΗΡΑΚΛΕΙΟΥ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "19",
+            "name": "Ν. ΘΕΣΠΡΩΤΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "29",
+            "name": "Ν. ΘΕΣΣΑΛΟΝΙΚΗΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "20",
+            "name": "Ν. ΙΩΑΝΝΙΝΩΝ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "30",
+            "name": "Ν. ΚΑΒΑΛΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "22",
+            "name": "Ν. ΚΑΡΔΙΤΣΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "31",
+            "name": "Ν. ΚΑΣΤΟΡΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "15",
+            "name": "Ν. ΚΕΡΚΥΡΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "16",
+            "name": "Ν. ΚΕΦΑΛΛΟΝΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "32",
+            "name": "Ν. ΚΙΛΚΙΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "33",
+            "name": "Ν. ΚΟΖΑΝΗΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "11",
+            "name": "Ν. ΚΟΡΙΝΘΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "44",
+            "name": "Ν. ΚΥΚΛΑΔΩΝ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "12",
+            "name": "Ν. ΛΑΚΩΝΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "23",
+            "name": "Ν. ΛΑΡΙΣΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "49",
+            "name": "Ν. ΛΑΣΙΘΙΟΥ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "45",
+            "name": "Ν. ΛΕΣΒΟΥ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "17",
+            "name": "Ν. ΛΕΥΚΑΔΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "24",
+            "name": "Ν. ΜΑΓΝΗΣΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "13",
+            "name": "Ν. ΜΕΣΣΗΝΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "41",
+            "name": "Ν. ΞΑΝΘΗΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "34",
+            "name": "Ν. ΠΕΛΛΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "35",
+            "name": "Ν. ΠΙΕΡΙΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "21",
+            "name": "Ν. ΠΡΕΒΕΖΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "50",
+            "name": "Ν. ΡΕΘΥΜΝΟΥ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "42",
+            "name": "Ν. ΡΟΔΟΠΗΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "46",
+            "name": "Ν. ΣΑΜΟΥ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "36",
+            "name": "Ν. ΣΕΡΡΩΝ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "25",
+            "name": "Ν. ΤΡΙΚΑΛΩΝ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "5",
+            "name": "Ν. ΦΘΙΩΤΙΔΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "37",
+            "name": "Ν. ΦΛΩΡΙΝΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "6",
+            "name": "Ν. ΦΩΚΙΔΑΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "38",
+            "name": "Ν. ΧΑΛΚΙΔΙΚΗΣ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "51",
+            "name": "Ν. ΧΑΝΙΩΝ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        },
+        {
+            "id": "47",
+            "name": "Ν. ΧΙΟΥ",
+            "countiesFilePath": "",
+            "municipalitiesFilePath": ""
+        }
+    ]
+}

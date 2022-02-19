@@ -3,19 +3,40 @@ const editJsonFile = require("edit-json-file");
 
 const stateList = require('./data/stateList.json');
 
-if ((!process.argv[2] && process.argv[2] !== 'All') || (process.argv[2] !== 'All' && !process.argv[3])) {
-    console.log('You must give Greek state and municipality ids as argument, or "All" to fetch them all.');
+if ((!process.argv[2] && process.argv[2] !== 'all') || (process.argv[2] !== 'all' && !process.argv[3])) {
+    console.log('You must give Greek state and municipality ids as argument, or "all" to fetch them all.');
     return 0;
 }
 
 let statesToFetch = [];
 let stateIdArg = process.argv[2];
 let municipalityIdArg = process.argv[3];
+let computationSpeed = process.argv[4];
 
 let municipalityList;
 let streetList;
 
-if (stateIdArg === 'All') {
+function uriGenerator(streetsFilePath, streetName, stateName, municipalityName, prefectureName) {
+    const fewNumbers = [2, 13, 24, 35, 46];
+    const alotNumbers = [2, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 38, 41, 44];
+    const streetNumberArray = (computationSpeed === 'fast') ? fewNumbers : alotNumbers;
+
+    streetNumberArray.forEach(number => {
+        queueStreetList.push((encodeURI(`https://www.cosmote.gr/selfcare/jsp/ajax/avdslavailabilityAjaxV2.jsp?` +
+            `Accept-Language=en-US,en;q=0.9,el-GR;q=0.8,el;q=0.7` +
+            `mTelno=&` +
+            `mFilePath=${municipalityList[j].streetsFilePath}&` +
+            `mAddress=${streetName}&` +
+            `mState=${stateName}&` +
+            `mPrefecture=${municipalityName}&` +
+            `mNumber=${number}&` +
+            `mArea=${prefectureName}&` +
+            `searchcriteria=address&` +
+            `ct=bus`)))
+    });
+}
+
+if (stateIdArg === 'all') {
     statesToFetch = stateList.states.map(state => state);
 } else {
     stateList.states.some(state => {
@@ -50,7 +71,7 @@ for (i in statesToFetch) {
     }
 
     for (j in municipalityList) {
-        if (municipalityIdArg !== 'All' && municipalityIdArg !== municipalityList[j].id) {
+        if (municipalityIdArg !== 'all' && municipalityIdArg !== municipalityList[j].id) {
             continue;
         }
 
@@ -72,35 +93,13 @@ for (i in statesToFetch) {
         });
 
         for (k in streetList) {
-            if (streetList[k].prefecture.id !== {}) {
-                if ((stateIdArg && stateIdArg.localeCompare('All') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('All') === 0)) {
-                    [2, 3, 6, 9, 12, 15, 16].forEach(number => {
-                        queueStreetList.push((encodeURI(`https://www.cosmote.gr/selfcare/jsp/ajax/avdslavailabilityAjaxV2.jsp?` +
-                            `Accept-Language=en-US,en;q=0.9,el-GR;q=0.8,el;q=0.7` +
-                            `mTelno=&` +
-                            `mFilePath=${municipalityList[j].streetsFilePath}&` +
-                            `mAddress=${streetList[k].name}&` +
-                            `mState=${statesToFetch[i].name}&` +
-                            `mPrefecture=${municipalityList[j].name}&` +
-                            `mNumber=${number}&` +
-                            `mArea=${streetList[k].prefecture.name}&` +
-                            `searchcriteria=address&` +
-                            `ct=bus`)))
-                    });
+            if (streetList[k].speed && streetList[k].speed.length === 0) {
+                if ((stateIdArg && stateIdArg.localeCompare('all') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('all') === 0)) {
+                    uriGenerator(municipalityList[j].streetsFilePath, streetList[k].name,
+                        statesToFetch[i].name, municipalityList[j].name, number, streetList[k].prefecture.name);
                 } else if (municipalityIdArg == municipalityList[j].id) {
-                    [2, 3, 6, 9, 12, 15, 16].forEach(number => {
-                        queueStreetList.push((encodeURI(`https://www.cosmote.gr/selfcare/jsp/ajax/avdslavailabilityAjaxV2.jsp?` +
-                            `Accept-Language=en-US,en;q=0.9,el-GR;q=0.8,el;q=0.7` +
-                            `mTelno=&` +
-                            `mFilePath=${municipalityList[j].streetsFilePath}&` +
-                            `mAddress=${streetList[k].name}&` +
-                            `mState=${statesToFetch[i].name}&` +
-                            `mPrefecture=${municipalityList[j].name}&` +
-                            `mNumber=${number}&` +
-                            `mArea=${streetList[k].prefecture.name}&` +
-                            `searchcriteria=address&` +
-                            `ct=bus`)))
-                    });
+                    uriGenerator(municipalityList[j].streetsFilePath, streetList[k].name,
+                        statesToFetch[i].name, municipalityList[j].name, number, streetList[k].prefecture.name);
                 }
             } else {
                 console.log('[5] Before running speedAvailabilityCrawler.js you must first fetch all streets with prefectureCrawler.js.');
@@ -109,7 +108,7 @@ for (i in statesToFetch) {
         }
     }
 }
-console.log('queueStreetList :>> ', queueStreetList);
+
 if (queueStreetList.length === 0) {
     console.log('You must give a valid, Greek municipality id.');
     return 0;
@@ -119,15 +118,14 @@ const c = new Crawler({
     maxConnections: 10,
     rateLimit: 1000,
 
-    // This will be called for each crawled page
     callback: (error, res, done) => {
         if (error) {
             console.log(error);
         } else {
             const $ = res.$;
 
-            // finding current state
             let uri = res.options.uri;
+
             filePath = uri.substring(uri.indexOf("mFilePath=") + 10, uri.indexOf("&mAddress="));
             streetName = decodeURI(uri.substring(uri.indexOf("mAddress=") + 9, uri.indexOf("&mState=")));
             streetNumber = uri.substring(uri.indexOf("mNumber=") + 8, uri.indexOf("&mArea="));
@@ -140,30 +138,36 @@ const c = new Crawler({
 
             const street = streets.find(str => str.name === streetName);
 
+            networkAvailability = {
+                speed200: ($.text().replace(/\s/g, '')
+                    .includes('Έως200MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false,
+                speed100: ($.text().replace(/\s/g, '')
+                    .includes('Έως100MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false,
+                speed50: ($.text().replace(/\s/g, '')
+                    .includes('Έως50MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false,
+                speed24: ($.text().replace(/\s/g, '')
+                    .includes('Έως24MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false
+            };
+
             street.speeds.push({
                 streetNumber: streetNumber,
-                networkAvailability: {
-                    speed200: ($.text().replace(/\s/g, '')
-                        .includes('Έως200MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false,
-                    speed100: ($.text().replace(/\s/g, '')
-                        .includes('Έως100MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false,
-                    speed50: ($.text().replace(/\s/g, '')
-                        .includes('Έως50MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false,
-                    speed24: ($.text().replace(/\s/g, '')
-                        .includes('Έως24MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false
-                }
+                networkAvailability: networkAvailability
             });
 
-            const streetsJsono = editJsonFile(streetsFilePath);
-            streetsJsono.write(JSON.stringify(streets));
+            if (networkAvailability.speed200 || networkAvailability.speed100 || networkAvailability.speed50 || networkAvailability.speed24) {
+                // if($.text().replace(/\s/g, '').includes('Τοαίτημάσουθαπρέπειναδιερευνηθείπερισσότερο.')) {
+                const streetsJsono = editJsonFile(streetsFilePath);
+                streetsJsono.write(JSON.stringify(streets));
+                // }
+            }
 
-            const fastestAvailable = street.speeds.speed200
+            const fastestAvailable = networkAvailability.speed200
                 ? 'speeds of up to 200Mbps'
-                : street.speeds.speed100
+                : networkAvailability.speed100
                     ? 'speeds of up to 100Mbps'
-                    : street.speeds.speed50
+                    : networkAvailability.speed50
                         ? 'speeds of up to 50Mbps'
-                        : street.speeds.speed24
+                        : networkAvailability.speed24
                             ? 'speeds of up to 24Mbps'
                             : 'no available network';
 
@@ -176,4 +180,4 @@ const c = new Crawler({
     }
 });
 
-c.queue(queueStreetList[0]);
+c.queue(queueStreetList);
