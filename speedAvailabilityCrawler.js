@@ -25,7 +25,7 @@ function uriGenerator(streetsFilePath, streetName, stateName, municipalityName, 
         queueStreetList.push((encodeURI(`https://www.cosmote.gr/selfcare/jsp/ajax/avdslavailabilityAjaxV2.jsp?` +
             `Accept-Language=en-US,en;q=0.9,el-GR;q=0.8,el;q=0.7` +
             `mTelno=&` +
-            `mFilePath=${municipalityList[j].streetsFilePath}&` +
+            `mFilePath=${streetsFilePath}&` +
             `mAddress=${streetName}&` +
             `mState=${stateName}&` +
             `mPrefecture=${municipalityName}&` +
@@ -93,17 +93,14 @@ for (i in statesToFetch) {
         });
 
         for (k in streetList) {
-            if (streetList[k].speed && streetList[k].speed.length === 0) {
+            if (streetList[k].speeds && streetList[k].speeds.length === 0) {
                 if ((stateIdArg && stateIdArg.localeCompare('all') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('all') === 0)) {
                     uriGenerator(municipalityList[j].streetsFilePath, streetList[k].name,
-                        statesToFetch[i].name, municipalityList[j].name, number, streetList[k].prefecture.name);
+                        statesToFetch[i].name, municipalityList[j].name, streetList[k].prefecture.name);
                 } else if (municipalityIdArg == municipalityList[j].id) {
                     uriGenerator(municipalityList[j].streetsFilePath, streetList[k].name,
-                        statesToFetch[i].name, municipalityList[j].name, number, streetList[k].prefecture.name);
+                        statesToFetch[i].name, municipalityList[j].name, streetList[k].prefecture.name);
                 }
-            } else {
-                console.log('[5] Before running speedAvailabilityCrawler.js you must first fetch all streets with prefectureCrawler.js.');
-                return 0;
             }
         }
     }
