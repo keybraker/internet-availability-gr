@@ -43,7 +43,7 @@ for (i in statesToFetch) {
         return 0;
     }
 
-    municipalityList = require(statesToFetch[i].municipalitiesFilePath);
+    const municipalityList = require(statesToFetch[i].municipalitiesFilePath);
 
     if (!municipalityList) {
         console.log('[2] Before running prefectureCrawler.js you must first fetch all municipalities with stateCrawler.js.');
@@ -51,8 +51,10 @@ for (i in statesToFetch) {
     }
 
     for (j in municipalityList) {
-        if (municipalityIdArg !== 'all' && municipalityIdArg !== municipalityList[j].id) {
-            continue;
+        if (stateIdArg !== 'all') {
+            if (municipalityIdArg !== 'all' && municipalityIdArg !== municipalityList[j].id) {
+                continue;
+            }
         }
 
         if (!municipalityList[j].streetsFilePath) {
@@ -60,7 +62,7 @@ for (i in statesToFetch) {
             return 0;
         }
 
-        streetList = require(municipalityList[j].streetsFilePath);
+        const streetList = require(municipalityList[j].streetsFilePath);
 
         if (!streetList) {
             console.log('[4] Before running prefectureCrawler.js you must first fetch all streets with municipalityCrawler.js.');
@@ -73,7 +75,7 @@ for (i in statesToFetch) {
         });
 
         for (k in streetList) {
-            if (!streetList[k].prefecture.id) {
+            if (!streetList[k].prefecture || !streetList[k].prefecture.id) {
                 if ((stateIdArg && stateIdArg.localeCompare('all') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('all') === 0)) {
                     queueStreetList.push(encodeURI(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
                         `filePath=${municipalityList[j].streetsFilePath}&` +
@@ -143,15 +145,12 @@ const c = new Crawler({
                 }
             }
 
-
             const streetsJsono = editJsonFile(streetsFilePath);
             streetsJsono.write(JSON.stringify(streets));
 
-            console.log(`Street ${street.name} from municipality ${municipalityId} is in prefecture ${street.prefecture.name}.`);
+            console.log(`Street ${street.name} from municipality id ${municipalityId} is in prefecture ${street.prefecture.name}.`);
 
-            done(() => {
-                console.log(`\nPrefecture crawler has finished successfully.`);
-            });
+            done();
         }
     }
 });

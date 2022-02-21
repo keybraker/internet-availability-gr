@@ -7,7 +7,7 @@
     "description": "Greek Internet Speek Crawler",
     "main": "crawler.ts",
     "scripts": {
-        "start": "node stateCrawler.js 52 && node municipalityCrawler.js 52 714 && node prefectureCrawler.js 52 714 && node speedAvailabilityCrawler.js 48 714 fast"
+        "start": "node stateCrawler.js all && node municipalityCrawler.js all && node prefectureCrawler.js all && node speedAvailabilityCrawler.js all"
     },
     "repository": {
         "type": "git",
@@ -20,6 +20,7 @@
     "keywords": [],
     "dependencies": {
         "crawler": "^1.3.0",
-        "edit-json-file": "^1.7.0"
+        "edit-json-file": "^1.7.0",
+        "yargs": "^17.3.1"
     }
 }

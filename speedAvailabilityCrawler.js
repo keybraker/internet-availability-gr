@@ -63,7 +63,7 @@ for (i in statesToFetch) {
         return 0;
     }
 
-    municipalityList = require(statesToFetch[i].municipalitiesFilePath);
+    const municipalityList = require(statesToFetch[i].municipalitiesFilePath);
 
     if (!municipalityList) {
         console.log('[2] Before running speedAvailabilityCrawler.js you must first fetch all municipalities with stateCrawler.js.');
@@ -71,8 +71,10 @@ for (i in statesToFetch) {
     }
 
     for (j in municipalityList) {
-        if (municipalityIdArg !== 'all' && municipalityIdArg !== municipalityList[j].id) {
-            continue;
+        if (stateIdArg !== 'all') {
+            if (municipalityIdArg !== 'all' && municipalityIdArg !== municipalityList[j].id) {
+                continue;
+            }
         }
 
         if (!municipalityList[j].streetsFilePath) {
@@ -80,7 +82,7 @@ for (i in statesToFetch) {
             return 0;
         }
 
-        streetList = require(municipalityList[j].streetsFilePath);
+        const streetList = require(municipalityList[j].streetsFilePath);
 
         if (!streetList) {
             console.log('[4] Before running speedAvailabilityCrawler.js you must first fetch all streets with municipalityCrawler.js.');
@@ -93,7 +95,7 @@ for (i in statesToFetch) {
         });
 
         for (k in streetList) {
-            if (streetList[k].speeds && streetList[k].speeds.length === 0) {
+            if (!streetList[k].speeds || streetList[k].speeds.length === 0) {
                 if ((stateIdArg && stateIdArg.localeCompare('all') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('all') === 0)) {
                     uriGenerator(municipalityList[j].streetsFilePath, streetList[k].name,
                         statesToFetch[i].name, municipalityList[j].name, streetList[k].prefecture.name);
@@ -151,11 +153,10 @@ const c = new Crawler({
                 networkAvailability: networkAvailability
             });
 
-            if (networkAvailability.speed200 || networkAvailability.speed100 || networkAvailability.speed50 || networkAvailability.speed24) {
-                // if($.text().replace(/\s/g, '').includes('Τοαίτημάσουθαπρέπειναδιερευνηθείπερισσότερο.')) {
+            if (networkAvailability.speed200 || networkAvailability.speed100 || networkAvailability.speed50 || networkAvailability.speed24 ||
+                Number(streetNumber) < 20) {
                 const streetsJsono = editJsonFile(streetsFilePath);
                 streetsJsono.write(JSON.stringify(streets));
-                // }
             }
 
             const fastestAvailable = networkAvailability.speed200
@@ -170,9 +171,7 @@ const c = new Crawler({
 
             console.log(`Street ${street.name} - ${streetNumber} from municipality ${municipalityName} has ${fastestAvailable}.`);
 
-            done(() => {
-                console.log(`\nPrefecture crawler has finished successfully.`);
-            });
+            done();
         }
     }
 });

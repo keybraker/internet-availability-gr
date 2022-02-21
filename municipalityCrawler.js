@@ -151,9 +151,7 @@ const c = new Crawler({
                 `${currentMunicipality.name} of state ${statesToFetch.find(state => state.id === stateId).name}.`
             );
 
-            done(() => {
-                console.log(`\nMunicipality crawler has finished successfully.`);
-            });
+            done();
         }
     }
 });

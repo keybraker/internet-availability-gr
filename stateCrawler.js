@@ -11,13 +11,13 @@ if (!process.argv[2]) {
 }
 
 let statesToFetch = [];
-let stateId = process.argv[2];
+let stateIdArg = process.argv[2];
 
-if (stateId === 'all') {
+if (stateIdArg === 'all') {
     statesToFetch = stateList.states.map(state => state);
 } else {
     stateList.states.some(state => {
-        if (state.id === stateId) {
+        if (state.id === stateIdArg) {
             statesToFetch.push(state);
             return true;
         }
@@ -36,7 +36,7 @@ let queueMunicipalityList = [];
 
 for (let i in statesToFetch) {
     if (!statesToFetch[i].municipalitiesFilePath || statesToFetch[i].municipalitiesFilePath === '') {
-        if (!municipalityList) {
+        if (!fs.existsSync(statesToFetch[i].municipalitiesFilePath)) {
             queueMunicipalityList.push(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
                 `stateId=${statesToFetch[i].id}&` +
                 `_=${urlId++}`
@@ -69,9 +69,9 @@ const c = new Crawler({
 
             // finding current state
             let uri = res.options.uri;
-            id = uri.substring(uri.indexOf("stateId=") + 8, uri.indexOf("&_="));
+            stateId = uri.substring(uri.indexOf("stateId=") + 8, uri.indexOf("&_="));
 
-            const state = stateList.states.find(state => state.id === id);
+            const state = stateList.states.find(state => state.id === stateId);
 
             // finding states municipalities with resprective ids
             const lis = $("li");
@@ -116,9 +116,7 @@ const c = new Crawler({
 
             console.log(`Fetched ${municipalities.length} ${municipalities.length === 1 ? 'municipality' : 'municipalities'} for state ${state.name}.`);
 
-            done(() => {
-                console.log(`\nState crawler has finished successfully.`);
-            });
+            done();
         }
     }
 });
