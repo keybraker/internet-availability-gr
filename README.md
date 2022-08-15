@@ -41,8 +41,8 @@ File `./generated/state_39/municipalities.json` has a property called `streetsFi
 
    ```JSON
    "prefecture": {
-         "name": "ΑΓ. ΙΩΑΝΝΗΣ ΚΝΩΣΣΟΥ",
-         "id": "93214"
+      "name": "ΑΓ. ΙΩΑΝΝΗΣ ΚΝΩΣΣΟΥ",
+      "id": "93214"
    }
    ```
 
@@ -59,17 +59,17 @@ File `./generated/state_39/municipalities.json` has a property called `streetsFi
    > Streets object has an array property called speeds where speeds by street number are stored as follows:
 
    ```JSON
-    "speeds": [
-            {
-                "streetNumber": "9",
-                "networkAvailability": {
-                    "speed200": false,
-                    "speed100": false,
-                    "speed50": true,
-                    "speed24": true
-                }
-            }
-        ]
+   "speeds": [
+      {
+         "streetNumber": "9",
+         "networkAvailability": {
+            "speed200": false,
+            "speed100": false,
+            "speed50": true,
+            "speed24": true
+         }
+      }
+   ]
    ```
 
 ## Data Analyzer
