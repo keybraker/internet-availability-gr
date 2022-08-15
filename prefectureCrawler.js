@@ -102,8 +102,8 @@ if (queueStreetList.length === 0) {
 }
 
 const c = new Crawler({
-    maxConnections: 10,
-    rateLimit: 800,
+    maxConnections: 100,
+    rateLimit: 100,
 
     // This will be called for each crawled page
     callback: (error, res, done) => {

@@ -17,7 +17,7 @@ let municipalityList;
 let streetList;
 
 function uriGenerator(streetsFilePath, streetName, stateName, municipalityName, prefectureName) {
-    const fewNumbers = [2, 13, 24, 35, 46];
+    const fewNumbers = [2, 5, 11, 16, 24];
     const alotNumbers = [2, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 38, 41, 44];
     const streetNumberArray = (computationSpeed === 'fast') ? fewNumbers : alotNumbers;
 
@@ -114,8 +114,8 @@ if (queueStreetList.length === 0) {
 }
 
 const c = new Crawler({
-    maxConnections: 10,
-    rateLimit: 1000,
+    maxConnections: 100,
+    rateLimit: 100,
 
     callback: (error, res, done) => {
         if (error) {
