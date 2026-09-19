@@ -148,7 +148,7 @@ const c = new Crawler({
             }
 
             const streetsJsono = editJsonFile(streetsFilePath);
-            streetsJsono.write(JSON.stringify(streets));
+            streetsJsono.write(JSON.stringify(streets, null, 4));
 
             console.log(`Street ${street.name} from municipality id ${municipalityId} is in prefecture ${street.prefecture.name}.`);
 

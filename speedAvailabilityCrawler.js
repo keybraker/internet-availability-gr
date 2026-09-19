@@ -158,7 +158,7 @@ const c = new Crawler({
             if (networkAvailability.speed200 || networkAvailability.speed100 || networkAvailability.speed50 || networkAvailability.speed24 ||
                 Number(streetNumber) < 20) {
                 const streetsJsono = editJsonFile(streetsFilePath);
-                streetsJsono.write(JSON.stringify(streets));
+                streetsJsono.write(JSON.stringify(streets, null, 4));
             }
 
             const fastestAvailable = networkAvailability.speed200

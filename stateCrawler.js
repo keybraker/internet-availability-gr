@@ -107,14 +107,14 @@ const c = new Crawler({
             const stateMunicipalities = editJsonFile(state.municipalitiesFilePath);
 
             if (stateMunicipalities) {
-                stateMunicipalities.write(JSON.stringify(municipalities));
+                stateMunicipalities.write(JSON.stringify(municipalities, null, 4));
             } else {
-                fs.appendFile(state.municipalitiesFilePath, JSON.stringify(municipalities), function (err) {
+                fs.appendFile(state.municipalitiesFilePath, JSON.stringify(municipalities, null, 4), function (err) {
                     if (err) throw err;
                 });
             }
 
-            stateListSTATIC.write(JSON.stringify(stateList));
+            stateListSTATIC.write(JSON.stringify(stateList, null, 4));
 
             console.log(`Fetched ${municipalities.length} ${municipalities.length === 1 ? 'municipality' : 'municipalities'} for state ${state.name}.`);
 
