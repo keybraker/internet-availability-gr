@@ -38,6 +38,58 @@ function uriGenerator(streetsFilePath, streetName, stateName, municipalityName, 
     });
 }
 
+// The availability response used to announce each speed tier in a sentence ("Έως 200Mbps Διαθέσιμο
+// στην περιοχή σου!"), but it now returns a table where every tier available at the address gets
+// its own row:
+//
+//   <tr class="res">
+//       <td class="COSMOTE-FIBER">Telekom Fiber 200 Mbps</td>       (COSMOTE-FIBER is the site's
+//       <td class="p table-para">Διαθέσιμο στην περιοχή σου...</td>  own legacy class name)
+//   </tr>
+//
+// Only the residential table is read, since the analyzer counts households. Rows that are not
+// reported as available, or that carry no speed, are ignored, and no rows at all means the
+// address could not be resolved.
+function parseNetworkAvailability($) {
+    let residentialRows = $('#residential-search-panel tr');
+
+    if (residentialRows.length === 0) {
+        residentialRows = $('tr.res');
+    }
+
+    let fastestTier = 0;
+
+    residentialRows.each((index, row) => {
+        const cells = $(row).find('td');
+        const label = cells.eq(0).text().replace(/\s+/g, ' ').trim();
+        const status = cells.eq(1).text().replace(/\s+/g, ' ').trim();
+
+        if (!status.includes('Διαθέσιμο') || status.includes('Μη διαθέσιμο')) {
+            return;
+        }
+
+        const speed = label.match(/(\d+)\s*([GM])bps/i);
+
+        if (!speed) {
+            return;
+        }
+
+        // '1 Gbps' labels sit above 200 Mbps, so they count towards the fastest tier.
+        const tier = Number(speed[1]) * (speed[2].toUpperCase() === 'G' ? 1000 : 1);
+
+        fastestTier = Math.max(fastestTier, tier);
+    });
+
+    // Speeds are advertised as "up to X Mbps", so the fastest tier available at an address also
+    // makes every slower tier available there.
+    return {
+        speed200: fastestTier >= 200,
+        speed100: fastestTier >= 100,
+        speed50: fastestTier >= 50,
+        speed24: fastestTier >= 24
+    };
+}
+
 if (stateIdArg === 'all') {
     statesToFetch = stateList.states.map(state => state);
 } else {
@@ -139,16 +191,7 @@ const c = new Crawler({
 
             const street = streets.find(str => str.name === streetName);
 
-            networkAvailability = {
-                speed200: ($.text().replace(/\s/g, '')
-                    .includes('Έως200MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false,
-                speed100: ($.text().replace(/\s/g, '')
-                    .includes('Έως100MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false,
-                speed50: ($.text().replace(/\s/g, '')
-                    .includes('Έως50MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false,
-                speed24: ($.text().replace(/\s/g, '')
-                    .includes('Έως24MbpsΔιαθέσιμοστηνπεριοχήσου!')) ? true : false
-            };
+            networkAvailability = parseNetworkAvailability($);
 
             street.speeds.push({
                 streetNumber: streetNumber,
