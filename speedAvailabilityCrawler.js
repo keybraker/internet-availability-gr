@@ -21,8 +21,10 @@ function uriGenerator(streetsFilePath, streetName, stateName, municipalityName, 
     const alotNumbers = [2, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 38, 41, 44];
     const streetNumberArray = (computationSpeed === 'fast') ? fewNumbers : alotNumbers;
 
+    // NOTE: Cosmote rebranded to Telekom, so the endpoint below was renamed from cosmote.gr to
+    // telekom.gr (the old cosmote.gr URL now redirects to telekom.gr).
     streetNumberArray.forEach(number => {
-        queueStreetList.push((encodeURI(`https://www.cosmote.gr/selfcare/jsp/ajax/avdslavailabilityAjaxV2.jsp?` +
+        queueStreetList.push((encodeURI(`https://www.telekom.gr/selfcare/jsp/ajax/avdslavailabilityAjaxV2.jsp?` +
             `Accept-Language=en-US,en;q=0.9,el-GR;q=0.8,el;q=0.7` +
             `mTelno=&` +
             `mFilePath=${streetsFilePath}&` +

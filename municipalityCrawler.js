@@ -35,6 +35,8 @@ let urlId = 1641891804000;
 let queueStreetList = [];
 let objectMunicipalityList = [];
 
+// NOTE: Cosmote rebranded to Telekom, so the endpoint below was renamed from cosmote.gr to
+// telekom.gr (the old cosmote.gr URL now redirects to telekom.gr).
 for (let i in statesToFetch) {
     if (!statesToFetch[i].municipalitiesFilePath) {
         console.log('Before running municipalityCrawler.js you must first fetch all municipalities with stateCrawler.js.');
@@ -56,13 +58,13 @@ for (let i in statesToFetch) {
     for (let j in municipalityList) {
         if (!fs.existsSync(municipalityList[j].streetsFilePath)) {
             if ((stateIdArg && stateIdArg.localeCompare('all') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('all') === 0)) {
-                queueStreetList.push(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
+                queueStreetList.push(`https://www.telekom.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
                     `filePath=${statesToFetch[i].municipalitiesFilePath}&` +
                     `stateId=${statesToFetch[i].id}&` +
                     `municipalityId=${municipalityList[j].id}&` +
                     `_=${urlId++}`);
             } else if (municipalityIdArg == municipalityList[j].id) {
-                queueStreetList.push(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
+                queueStreetList.push(`https://www.telekom.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
                     `filePath=${statesToFetch[i].municipalitiesFilePath}&` +
                     `stateId=${statesToFetch[i].id}&` +
                     `municipalityId=${municipalityList[j].id}&` +

@@ -34,17 +34,19 @@ if (stateIdArg === 'all') {
 let urlId = 1641891804000;
 let queueMunicipalityList = [];
 
+// NOTE: Cosmote rebranded to Telekom, so the endpoint below was renamed from cosmote.gr to
+// telekom.gr (the old cosmote.gr URL now redirects to telekom.gr).
 for (let i in statesToFetch) {
     if (!statesToFetch[i].municipalitiesFilePath || statesToFetch[i].municipalitiesFilePath === '') {
         if (!fs.existsSync(statesToFetch[i].municipalitiesFilePath)) {
-            queueMunicipalityList.push(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
+            queueMunicipalityList.push(`https://www.telekom.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
                 `stateId=${statesToFetch[i].id}&` +
                 `_=${urlId++}`
             );
         }
     } else {
         if (!fs.existsSync(statesToFetch[i].municipalitiesFilePath)) {
-            queueMunicipalityList.push(`https://www.cosmote.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
+            queueMunicipalityList.push(`https://www.telekom.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
                 `stateId=${statesToFetch[i].id}&` +
                 `_=${urlId++}`
             );

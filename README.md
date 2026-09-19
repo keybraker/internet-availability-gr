@@ -1,6 +1,8 @@
 # Internet Availability Crawler (Greece)
 
-This program crawls [Cosmote](https://www.cosmote.gr/selfcare/jsp/diathesimotita-adsl-vdsl-cosmotetv.jsp?ct=bus#)'s API to fetch data for internet speed availability in Greece.
+This program crawls [Telekom](https://www.telekom.gr/selfcare/jsp/diathesimotita-adsl-vdsl-cosmotetv.jsp?ct=bus#)'s API to fetch data for internet speed availability in Greece.
+
+> **Note:** Cosmote rebranded to Telekom. This project originally used endpoints hosted under `cosmote.gr`, which have been renamed to the equivalent `telekom.gr` endpoints (the old `cosmote.gr` URLs now redirect to `telekom.gr`). Endpoint paths were left as-is.
 
 ## How it works
 
