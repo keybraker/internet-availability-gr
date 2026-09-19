@@ -110,6 +110,7 @@ if (stateIdArg === 'all') {
 
 let queueStreetList = [];
 let objectStreetList = [];
+let streetsWithoutPrefecture = 0;
 
 for (i in statesToFetch) {
     if (!statesToFetch[i].municipalitiesFilePath) {
@@ -149,6 +150,13 @@ for (i in statesToFetch) {
         });
 
         for (k in streetList) {
+            // a street without a prefecture would be requested with an empty mArea, which the site
+            // answers with no results, so the gap would stay hidden in the output
+            if (!streetList[k].prefecture || !streetList[k].prefecture.name) {
+                streetsWithoutPrefecture++;
+                continue;
+            }
+
             if (!streetList[k].speeds || streetList[k].speeds.length === 0) {
                 if ((stateIdArg && stateIdArg.localeCompare('all') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('all') === 0)) {
                     uriGenerator(municipalityList[j].streetsFilePath, streetList[k].name,
@@ -160,6 +168,10 @@ for (i in statesToFetch) {
             }
         }
     }
+}
+
+if (streetsWithoutPrefecture > 0) {
+    console.log(`Skipped ${streetsWithoutPrefecture} ${streetsWithoutPrefecture === 1 ? 'street' : 'streets'} without a prefecture, run prefectureCrawler.js for them first.`);
 }
 
 if (queueStreetList.length === 0) {
