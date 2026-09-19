@@ -38,34 +38,41 @@ if (argv.s) {
 
   console.log(
     `Network availability analyzer:\n`,
-    ` 24 Mbps have ${TWMbps}/${withData}, which is ${(
-      (TWMbps / withData) *
-      100
-    ).toFixed(1)}% of all.\n`,
-    ` 50 Mbps have ${FIMbps}/${withData}, which is ${(
-      (FIMbps / withData) *
-      100
-    ).toFixed(1)}% of all.\n`,
-    `100 Mbps have ${OHMbps}/${withData}, which is ${(
-      (OHMbps / withData) *
-      100
-    ).toFixed(1)}% of all.\n`,
-    `200 Mbps have ${THMbps}/${withData}, which is ${(
-      (THMbps / withData) *
-      100
-    ).toFixed(1)}% of all.\n\n`,
+    ` 24 Mbps have ${TWMbps}/${withData}, which is ${percentage(
+      TWMbps,
+      withData
+    )} of all.\n`,
+    ` 50 Mbps have ${FIMbps}/${withData}, which is ${percentage(
+      FIMbps,
+      withData
+    )} of all.\n`,
+    `100 Mbps have ${OHMbps}/${withData}, which is ${percentage(
+      OHMbps,
+      withData
+    )} of all.\n`,
+    `200 Mbps have ${THMbps}/${withData}, which is ${percentage(
+      THMbps,
+      withData
+    )} of all.\n\n`,
 
-    `${((FIMbps / TWMbps) * 100).toFixed(
-      1
-    )}% of households with  24Mbps have also access to  50Mbps.\n`,
-    `${((OHMbps / FIMbps) * 100).toFixed(
-      1
-    )}% of households with  50Mbps have also access to 100Mbps.\n`,
-    `${((THMbps / OHMbps) * 100).toFixed(
-      1
-    )}% of households with 100Mbps have also access to 200Mbps.\n\n`,
+    `${percentage(
+      FIMbps,
+      TWMbps
+    )} of households with  24Mbps have also access to  50Mbps.\n`,
+    `${percentage(
+      OHMbps,
+      FIMbps
+    )} of households with  50Mbps have also access to 100Mbps.\n`,
+    `${percentage(
+      THMbps,
+      OHMbps
+    )} of households with 100Mbps have also access to 200Mbps.\n\n`,
     `* Please note that unavailability of network is not 100% accurate.`
   );
+
+  if (withData === 0) {
+    console.log(" No speed data has been recorded yet, so there is nothing to analyse.");
+  }
 } else if (argv.m) {
   if (!fs.existsSync(argv.m)) {
     console.log(`Municipality file ${argv.m}, does not exist.`);
@@ -101,34 +108,47 @@ if (argv.s) {
 
   console.log(
     `Network availability analyzer:\n`,
-    ` 24 Mbps have ${TWMbpsAll}/${withDataAll}, which is ${(
-      (TWMbpsAll / withDataAll) *
-      100
-    ).toFixed(1)}% of all.\n`,
-    ` 50 Mbps have ${FIMbpsAll}/${withDataAll}, which is ${(
-      (FIMbpsAll / withDataAll) *
-      100
-    ).toFixed(1)}% of all.\n`,
-    `100 Mbps have ${OHMbpsAll}/${withDataAll}, which is ${(
-      (OHMbpsAll / withDataAll) *
-      100
-    ).toFixed(1)}% of all.\n`,
-    `200 Mbps have ${THMbpsAll}/${withDataAll}, which is ${(
-      (THMbpsAll / withDataAll) *
-      100
-    ).toFixed(1)}% of all.\n\n`,
+    ` 24 Mbps have ${TWMbpsAll}/${withDataAll}, which is ${percentage(
+      TWMbpsAll,
+      withDataAll
+    )} of all.\n`,
+    ` 50 Mbps have ${FIMbpsAll}/${withDataAll}, which is ${percentage(
+      FIMbpsAll,
+      withDataAll
+    )} of all.\n`,
+    `100 Mbps have ${OHMbpsAll}/${withDataAll}, which is ${percentage(
+      OHMbpsAll,
+      withDataAll
+    )} of all.\n`,
+    `200 Mbps have ${THMbpsAll}/${withDataAll}, which is ${percentage(
+      THMbpsAll,
+      withDataAll
+    )} of all.\n\n`,
 
-    `${((FIMbpsAll / TWMbpsAll) * 100).toFixed(
-      1
-    )}% of households with  24Mbps have also access to  50Mbps.\n`,
-    `${((OHMbpsAll / FIMbpsAll) * 100).toFixed(
-      1
-    )}% of households with  50Mbps have also access to 100Mbps.\n`,
-    `${((THMbpsAll / OHMbpsAll) * 100).toFixed(
-      1
-    )}% of households with 100Mbps have also access to 200Mbps.\n\n`,
+    `${percentage(
+      FIMbpsAll,
+      TWMbpsAll
+    )} of households with  24Mbps have also access to  50Mbps.\n`,
+    `${percentage(
+      OHMbpsAll,
+      FIMbpsAll
+    )} of households with  50Mbps have also access to 100Mbps.\n`,
+    `${percentage(
+      THMbpsAll,
+      OHMbpsAll
+    )} of households with 100Mbps have also access to 200Mbps.\n\n`,
     `* Please note that unavailability of network is not 100% accurate.`
   );
+
+  if (withDataAll === 0) {
+    console.log(" No speed data has been recorded yet, so there is nothing to analyse.");
+  }
+}
+
+// A denominator of zero is normal: freshly crawled files have no speed data yet, and a speed that
+// is never available has no households to take a share of. Those used to print NaN%.
+function percentage(part, total) {
+  return total === 0 ? "n/a" : `${((part / total) * 100).toFixed(1)}%`;
 }
 
 function streetFileAnalyzer(streetFile) {
