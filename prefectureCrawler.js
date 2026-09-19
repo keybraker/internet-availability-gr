@@ -15,6 +15,15 @@ let municipalityIdArg = process.argv[3];
 let municipalityList;
 let streetList;
 
+// The street lookup only matches the parenthetical suffix in the uppercase form held in the site's
+// database ("ΑΒΕΡΩΦ (ΟΔΌΣ)"), while the street lists return it in title case ("ΑΒΕΡΩΦ (Οδός)")
+// for most of the country. Only the parenthetical is normalised, so street names stay exactly as
+// the site lists them everywhere else. Plain toUpperCase() keeps the accent the database uses,
+// while toLocaleUpperCase('el') would drop it and stop matching.
+function streetNameForLookup(streetName) {
+    return streetName.replace(/\(([^)]*)\)/g, (parenthetical) => parenthetical.toUpperCase());
+}
+
 if (stateIdArg === 'all') {
     statesToFetch = stateList.states.map(state => state);
 } else {
@@ -81,14 +90,14 @@ for (i in statesToFetch) {
                 if ((stateIdArg && stateIdArg.localeCompare('all') === 0) || (municipalityIdArg && municipalityIdArg.localeCompare('all') === 0)) {
                     queueStreetList.push(encodeURI(`https://www.telekom.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
                         `filePath=${municipalityList[j].streetsFilePath}&` +
-                        `streetName=${streetList[k].name}&` +
+                        `streetName=${streetNameForLookup(streetList[k].name)}&` +
                         `stateId=${statesToFetch[i].id}&` +
                         `municipalityId=${municipalityList[j].id}&` +
                         `_=${urlId++}`));
                 } else if (municipalityIdArg == municipalityList[j].id) {
                     queueStreetList.push(encodeURI(`https://www.telekom.gr/eshop/global/gadgets/populateAddressDetailsV3.jsp?` +
                         `filePath=${municipalityList[j].streetsFilePath}&` +
-                        `streetName=${streetList[k].name}&` +
+                        `streetName=${streetNameForLookup(streetList[k].name)}&` +
                         `stateId=${statesToFetch[i].id}&` +
                         `municipalityId=${municipalityList[j].id}&` +
                         `_=${urlId++}`));
@@ -126,7 +135,7 @@ const c = new Crawler({
             const streets = streetListFile.fileData;
             const streetsFilePath = streetListFile.filePath;
 
-            const street = streets.find(str => str.name === streetName);
+            const street = streets.find(str => streetNameForLookup(str.name) === streetName);
 
             // finding states streets with resprective ids
 
